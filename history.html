@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Expense History</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Expense History</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="history.html">History</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>All Expenses</h2>
+      <table id="history-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    const expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+    const tbody = document.querySelector("#history-table tbody");
+    expenses.forEach(exp => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${exp.title}</td>
+        <td>$${exp.amount.toFixed(2)}</td>
+        <td>${exp.category}</td>
+        <td>${exp.date}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  </script>
+</body>
+</html>
